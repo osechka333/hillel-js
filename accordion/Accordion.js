@@ -1,11 +1,17 @@
 class Accordion {
-    constructor(rootEl) {
-        this.rootEl = rootEl;
+    static FIRST_ACCORDION_ITEM = 0;
+    static ITEM_CLASS = 'accordion-item';
+    static ITEM_HEADER_CLASS = 'accordion-item-header';
+    static ITEM_CONTENT_CLASS = 'accordion-item-content'
+    static ITEM_OPEN_CLASS = 'open';
 
+    constructor(rootEl, defaultOpenIndex = Accordion.FIRST_ACCORDION_ITEM) {
+        this.rootEl = rootEl;
         this.accordionItems = Array.from(this.rootEl.children);
 
         this.bindStyles();
         this.bindEvents();
+        this.openContentByIndex(defaultOpenIndex);
 
     }
     bindStyles() {
@@ -16,9 +22,9 @@ class Accordion {
             const [ header, content ] = accordionItem.children;
 
             //accordionItem.className = 'accordion-item'; //overwrite all class names
-            accordionItem.classList.add('accordion-item');
-            header.classList.add('accordion-item-header');
-            content.classList.add('accordion-item-content');
+            accordionItem.classList.add(Accordion.ITEM_CLASS);
+            header.classList.add(Accordion.ITEM_HEADER_CLASS);
+            content.classList.add(Accordion.ITEM_CONTENT_CLASS);
         })
     }
     bindEvents() {
@@ -27,7 +33,7 @@ class Accordion {
     }
 
     onRootElClick(e){
-        const header = e.target.closest('.accordion-item-header');
+        const header = e.target.closest('.' + Accordion.ITEM_HEADER_CLASS);
 
         if (header) {
             const contentEl = this.getContentEl(e.target);
@@ -43,24 +49,26 @@ class Accordion {
     }
 
     getContentEl(e) {
-        const accordionItemEl = e.closest('.accordion-item');
+        const accordionItemEl = e.closest('.' + Accordion.ITEM_CLASS);
 
-        return accordionItemEl.querySelector('.accordion-item-content');
+        return accordionItemEl.querySelector('.' + Accordion.ITEM_CONTENT_CLASS);
     }
 
     toggleContent(contentEl) {
-        contentEl.classList.toggle('open');
+        contentEl.classList.toggle(Accordion.ITEM_OPEN_CLASS);
     }
 
-    // openContent(contentEl){
-    //     contentEl.classList.add('open');
-    // }
+    openContentByIndex(index){
+        const content = this.getContentEl(this.accordionItems[index]);
+
+        this.toggleContent(content);
+    }
 
     closeContent(contentEl){
-        contentEl.classList.remove('open');
+        contentEl.classList.remove(Accordion.ITEM_OPEN_CLASS);
     }
 
     getOpenEl(){
-        return this.rootEl.querySelector('.open');
+        return this.rootEl.querySelector('.' + Accordion.ITEM_OPEN_CLASS);
     }
 }

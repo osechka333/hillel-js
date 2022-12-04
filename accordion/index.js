@@ -1,3 +1,3 @@
 const accordionElement = document.querySelector('#accordion');
 
-new Accordion(accordionElement);
+new Accordion(accordionElement, 1);
