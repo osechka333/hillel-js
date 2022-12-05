@@ -14,8 +14,7 @@ class Tabs {
 
         this.bindStyles();
         this.bindEvents();
-        this.openTab(this.tabItems[defaultTab]);
-        this.openContentByIndex(defaultTab);
+        this.openTab(this.tabItems[defaultTab], defaultTab);
     }
 
     bindStyles() {
@@ -42,8 +41,7 @@ class Tabs {
             if (selectedTab && tab !== selectedTab) {
                 this.closeTab(selectedTab, openedContent);
             }
-            this.openTab(tab);
-            this.openContentByIndex(tabIndex);
+            this.openTab(tab, tabIndex);
         }
 
     }
@@ -65,12 +63,8 @@ class Tabs {
         contentItem.classList.remove(Tabs.OPENED_CONTENT_CLASS);
     }
 
-    openTab(tabItem) {
+    openTab(tabItem, index) {
         tabItem.classList.toggle(Tabs.ACTIVE_TAB_CLASS);
-    }
-
-    openContentByIndex(index) {
         this.contentItems[index].classList.toggle(Tabs.OPENED_CONTENT_CLASS);
     }
-
 }
