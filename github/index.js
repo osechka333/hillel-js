@@ -26,7 +26,11 @@ function getUserData(name) {
             if (res.ok) {
                 return res.json()
             }
-            throw new Error('No found user. Please specify an another username');
+            if (res.status === 400 || res.status === 404) {
+                throw new Error('No found user. Please specify the another username')
+            }
+
+            throw new Error('Invalid request');
         })
 }
 function renderUserData(user) {
