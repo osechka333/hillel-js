@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Github User Check</title>
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+<form id="userForm">
+    <input id="input" type="text" placeholder="Enter the username"/>
+    <button id="searchButton">Save</button>
+</form>
+
+<div id="userContainer"></div>
+<script id="userTemplate" type="text/template">
+    <div class='UserInfoRow'>
+        <img src="{{avatar_url}}" />
+        <p>NUMBER OF PUBLIC REPOS: {{public_repos}}</p>
+        <p>USER TOKEN: {{id}}</p>
+    </div>
+</script>
+
+</form>
+</body>
+</html>
