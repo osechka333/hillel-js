@@ -1,13 +1,14 @@
+'use strict'
+
 const DELETE_BTN_CLASS = 'deleteBtn';
 const TODO_ITEM_SELECTOR = '.todoItem';
 const DONE_CLASS = 'done';
-// const HOVER_CLASS = 'hover';
 
 const ul = document.querySelector('#todoList');
 const input = document.querySelector('#input');
 const form = document.querySelector('#todoForm');
 
-form.addEventListener('submit', onFormClick);
+form.addEventListener('submit', onFormSubmit);
 ul.addEventListener('click', onUlClick)
 
 generateList();
@@ -29,7 +30,7 @@ function createTodo(list) {
     ul.insertAdjacentHTML('beforeend', html);
 }
 
-function onFormClick(e) {
+function onFormSubmit(e) {
     e.preventDefault();
 
     const item = getTodoItem();
@@ -62,22 +63,6 @@ function onUlClick(e) {
         todoItem.classList.toggle(DONE_CLASS);
     }
 }
-
-// function onUlMouseOver(e) {
-//     const todoItem = getItem(e.target);
-//
-//     if (todoItem) {
-//         todoItem.classList.add(HOVER_CLASS);
-//     }
-// }
-//
-// function onUlMouseLeave(e) {
-//     const todoItem = getItem(e.target);
-//
-//     if (todoItem) {
-//         todoItem.classList.remove(HOVER_CLASS);
-//     }
-// }
 
 function isItemValid(item) {
     return item !== '';
