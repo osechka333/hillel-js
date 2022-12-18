@@ -1,9 +1,7 @@
-'use strict'
-
 const DELETE_BTN_CLASS = 'deleteBtn';
 const TODO_ITEM_SELECTOR = '.todoItem';
 const DONE_CLASS = 'done';
-const HOVER_CLASS = 'hover';
+// const HOVER_CLASS = 'hover';
 
 const ul = document.querySelector('#todoList');
 const input = document.querySelector('#input');
@@ -11,32 +9,53 @@ const form = document.querySelector('#todoForm');
 
 form.addEventListener('submit', onFormClick);
 ul.addEventListener('click', onUlClick)
-ul.addEventListener('mouseover', onUlMousover)
-ul.addEventListener('mouseout', onUlMouseleave)
 
-createTodo('xxx');
-createTodo('yyy');
+generateList();
+
+function generateList() {
+    TodoApi.getList()
+        .then((list) => {
+        renderList(list);
+        })
+}
+
+function renderList(list) {
+    const html = list.map(generateHTML).join('');
+    ul.innerHTML = html;
+}
+
+function createTodo(list) {
+    const html = generateHTML(list);
+    ul.insertAdjacentHTML('beforeend', html);
+}
 
 function onFormClick(e) {
     e.preventDefault();
 
-    const message = getMessage();
+    const item = getTodoItem();
 
-    if (!isMessageValid(message)) {
+    if (!isItemValid(item)) {
         alert('The field could not be empty');
         return;
     }
 
-    createTodo(message);
+    createTodo(item);
+
+    TodoApi.create(item).then((newItem) => {
+        renderList(newItem);
+    })
     clear();
 }
 
 function onUlClick(e) {
-    const todoItem = getTodoEl(e.target);
+    const todoItem = getItem(e.target);
+    const id = getItemId(todoItem);
 
     if (todoItem) {
         if (e.target.classList.contains(DELETE_BTN_CLASS)) {
-            todoItem.remove()
+            TodoApi.delete(id).then(() => {
+                todoItem.remove();
+            })
             return;
         }
 
@@ -44,44 +63,49 @@ function onUlClick(e) {
     }
 }
 
-function onUlMousover(e) {
-    const todoItem = getTodoEl(e.target);
+// function onUlMouseOver(e) {
+//     const todoItem = getItem(e.target);
+//
+//     if (todoItem) {
+//         todoItem.classList.add(HOVER_CLASS);
+//     }
+// }
+//
+// function onUlMouseLeave(e) {
+//     const todoItem = getItem(e.target);
+//
+//     if (todoItem) {
+//         todoItem.classList.remove(HOVER_CLASS);
+//     }
+// }
 
-    if (todoItem) {
-        todoItem.classList.add(HOVER_CLASS);
-    }
+function isItemValid(item) {
+    return item !== '';
 }
 
-function onUlMouseleave(e) {
-    const todoItem = getTodoEl(e.target);
-
-    if (todoItem) {
-        todoItem.classList.remove(HOVER_CLASS);
-    }
+function getTodoItem() {
+    return {
+        title: input.value
+    };
 }
 
-function getTodoEl(el) {
-    return el.closest(TODO_ITEM_SELECTOR);
-}
-
-function getMessage() {
-    return input.value;
-}
-
-function isMessageValid(message) {
-    return message !== '';
-}
-
-function createTodo(message) {
-    const html = `
-  <li class="todoItem">
-    <span>${message}</span>
+function generateHTML(item) {
+    return `
+  <li class="todoItem" data-id="${item.id}">
+    <span>${item.title}</span>
     <button class="deleteBtn">Delete</button>
   </li>
   `
-
-    ul.insertAdjacentHTML('beforeend', html);
 }
+
+function getItem(el) {
+    return el.closest(TODO_ITEM_SELECTOR);
+}
+
+function getItemId(el) {
+    return el.dataset.id;
+}
+
 
 function clear() {
     form.reset()

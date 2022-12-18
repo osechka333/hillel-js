@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <title>To-do List</title>
     <link rel="stylesheet" href="index.css">
+    <script src="TodoApi.js" defer></script>
     <script src="index.js" defer></script>
 </head>
 <body>
-
-<ul id="todoList"></ul>
 
 <form id="todoForm">
     <input id="input" type="text" placeholder="Enter the value"/>
     <button id="addButton">Save</button>
 </form>
 
+<ul id="todoList"></ul>
+
 <div class="userContainer"></div>
 <script id="userTemplate" type="text/template">
-    <div class='UserInfoRow'>
-        <img src="{{src}}" />
-        <p>{{repos}}</p>
-        <p>{{followers}}</p>
-    </div>
+
 </script>
 
 </body>
