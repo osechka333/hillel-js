@@ -37,4 +37,21 @@ class TodoApi {
                 throw new Error('Not possible to remove the item on server')
             })
     }
+
+    static update(id, changes) {
+        return fetch(TodoApi.apiUrl + id, {
+            method: 'PUT',
+            body: JSON.stringify(changes),
+            headers: {
+                'Content-type': 'application/json',
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                throw new Error('Not possible to update the item on server');
+            })
+    }
 }
