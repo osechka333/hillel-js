@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Book</title>
+    <script src="api.js" defer></script>
+    <script src="contacts.js" defer></script>
+</head>
+
+<body>
+<table id="contactList">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Phone</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td><input id="nameInput" class="formInput" type="text" placeholder="Enter name"/></td>
+        <td><input id="surnameInput" class="formInput" type="text" placeholder="Enter surname"/></td>
+        <td><input id="phoneInput" class="formInput" type="text" placeholder="Enter phone"/></td>
+        <td><button id="addButton">Add new contact</button></td>
+        <td><input type="hidden" class="formInput" id="id"></td>
+    </tr>
+    <tbody id="contactData"></tbody>
+</table>
+</body>
+</html>
