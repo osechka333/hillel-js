@@ -26,7 +26,7 @@ class Gallery {
             });
     }
 
-    static getAlbumPhotos(albumId) {
+    static getAlbumPhotosList(albumId) {
         const newUrl = this.PHOTOS_URL.replace('id', albumId);
         return Gallery
             .request(newUrl)
