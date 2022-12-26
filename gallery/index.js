@@ -13,6 +13,7 @@ containerForAlbums.addEventListener('click', onContainerForAlbumsClick);
 init();
 
 function onContainerForAlbumsClick(e) {
+    e.preventDefault();
     const selectedAlbum = e.target.closest(ALBUM_SELECTOR);
     let albumId = selectedAlbum.dataset.id;
          if (albumId) {
