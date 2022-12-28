@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Contact Book</title>
+    <link rel="stylesheet" href="contacts.css">
     <script src="api.js" defer></script>
-    <script src="contacts.js" defer></script>
+    <script src="server_contact_book.js" defer></script>
 </head>
-
 <body>
-<table id="contactList">
+
+<h1>Contact book for emergency cases</h1>
+
+<form id="contactForm" class="form">
+    <input type="hidden"  name="id"             id="id" class="formInput">
+    <input type="text"    name="firstName"      id="nameInput"    class="formInput" />
+    <input type="text"    name="lastName"       id="surnameInput" class="formInput" />
+    <input type="text"    name="phone"          id="phoneInput"   class="formInput" />
+    <button>Save</button>
+</form>
+
+<table>
     <tr>
         <th>Name</th>
         <th>Surname</th>
         <th>Phone</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
-    <tr>
-        <td><input id="nameInput" class="formInput" type="text" placeholder="Enter name"/></td>
-        <td><input id="surnameInput" class="formInput" type="text" placeholder="Enter surname"/></td>
-        <td><input id="phoneInput" class="formInput" type="text" placeholder="Enter phone"/></td>
-        <td><button id="addButton">Add new contact</button></td>
-        <td><input type="hidden" class="formInput" id="id"></td>
-    </tr>
-    <tbody id="contactData"></tbody>
+
+    <tbody id="contactDataContainer"></tbody>
 </table>
+
 </body>
 </html>
