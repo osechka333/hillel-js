@@ -126,8 +126,10 @@ function saveContact(contact) {
 }
 function deleteContact(contact) {
     if(contact.id) {
+        const index = contactList.indexOf(contact);
         Contacts.deleteContact(contact.id)
             .then(() => {
+                contactList.splice(index);
         }).catch(displayErrorMessage)
     }
 }
@@ -145,7 +147,8 @@ function fillForm(contact) {
 function updateKeys(id, newContact) {
     const oldContact = findContactById(id);
 
-    Object.keys(newContact).forEach(key => oldContact[key] = newContact[key]);
+    Object.assign(newContact, oldContact);
+    // Object.keys(newContact).forEach(key => oldContact[key] = newContact[key]);
 }
 function replaceContact(id, newContact) {
     const oldContact = document.querySelector(`[data-id="${id}"]`);
