@@ -50,6 +50,7 @@ function onContainerClick(e) {
     if(contact) {
         if (e.target.classList.contains(DELETE_BUTTON)) {
             contactEl.remove();
+            deleteContact(contact);
         } else if (e.target.classList.contains(UPDATE_BUTTON)) {
             e.target.style.color = 'green';
             fillForm(contact);
@@ -121,6 +122,13 @@ function saveContact(contact) {
                 clearInput();
             })
             .catch(displayErrorMessage);
+    }
+}
+function deleteContact(contact) {
+    if(contact.id) {
+        Contacts.deleteContact(contact.id)
+            .then(() => {
+        }).catch(displayErrorMessage)
     }
 }
 
