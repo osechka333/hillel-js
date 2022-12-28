@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Book</title>
+    <link rel="stylesheet" href="contacts.css">
+    <script src="api.js" defer></script>
+    <script src="server_contact_book.js" defer></script>
+</head>
+<body>
+
+<h1>Contact book for emergency cases</h1>
+
+<form id="contactForm" class="form">
+    <input type="hidden"  name="id"             id="id" class="formInput">
+    <input type="text"    name="firstName"      id="nameInput"    class="formInput" />
+    <input type="text"    name="lastName"       id="surnameInput" class="formInput" />
+    <input type="text"    name="phone"          id="phoneInput"   class="formInput" />
+    <button>Save</button>
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+
+    <tbody id="contactDataContainer"></tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+.formInput {
+    width: 12.3%;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+.formInput.invalid {
+    border-color: red;
+}
+.list {
+    background-color: lightgrey;
+    border: 1px solid;
+    text-align: center;
+    width: 40%;
+}
+.contactItem {
+    background-color: aliceblue;
+}
