@@ -113,14 +113,15 @@ function saveContact(contact) {
             })
             .catch(displayErrorMessage);
         replaceContact(contact.id, contact);
+    } else {
+        Contacts.createContact(contact)
+            .then((newContact) => {
+                contactList.push(newContact);
+                renderContact(newContact);
+                clearInput();
+            })
+            .catch(displayErrorMessage);
     }
-    Contacts.createContact(contact)
-        .then((newContact) => {
-            contactList.push(newContact);
-            renderContact(newContact);
-            clearInput();
-    })
-        .catch(displayErrorMessage);
 }
 
 function findContactById(id) {
