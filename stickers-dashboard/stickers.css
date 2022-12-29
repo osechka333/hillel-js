@@ -1,0 +1,31 @@
+body {
+    margin: 20px auto;
+    font-family: 'Lato';
+}
+h2 {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #483D8B;
+}
+p {
+    font-size: 1rem;
+    font-weight: normal;
+}
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+li {
+    text-decoration:none;
+    display:block;
+    height:10em;
+    width:10em;
+    padding:1em;
+    background: #ffffcc;
+}
+
+ul li{
+    margin:1em;
+}
