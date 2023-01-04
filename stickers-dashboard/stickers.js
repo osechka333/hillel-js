@@ -67,7 +67,6 @@ function deleteSticker(stickerId) {
     Dashboard.delete(stickerId).then(() => {
         alert('Sticker was successfully deleted')
     });
-
 }
 
 function deleteStickerElement(stickerId) {
