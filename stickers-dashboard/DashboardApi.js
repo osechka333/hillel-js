@@ -41,4 +41,12 @@ class Dashboard {
         })
     }
 
+    static update(id, newData) {
+        return this
+            .request(this.requestUrl + id, 'PUT', newData)
+            .catch((response) => {
+                throw new Error(`Failed to update the sticker: : ${response.status}`);
+            })
+    }
+
 }

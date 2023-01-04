@@ -10,7 +10,7 @@ let defaultEmptyNote  = { description: '' };
 
 const $stickersListElements = $(STICKERS_CONTAINER)
     .on('click', DELETE_STICKER_SELECTOR, onDeleteBtnClick)
-    .on('click', EDIT_STICKER_SELECTOR, onInputClickEdit)
+    .on('focusout', EDIT_STICKER_SELECTOR, onInputFocusOut)
 ;
 
 $(ADD_STICKER_BUTTON).on('click', onAddBtnClick);
@@ -25,10 +25,16 @@ function onDeleteBtnClick(e) {
     deleteSticker($stickerIdToRemove);
 }
 
-function onInputClickEdit(e) {
-    e.preventDefault();
-    const $stickerToUpdate = getElement(e);
-    console.log($stickerToUpdate);
+function onInputFocusOut(e) {
+    e.preventDefault();;
+    const $sticker = getElement(e);
+    const $stickerId = getElementId($sticker);
+    const $stickerInput = $(this); // return jQuery collection of input
+    const $updatedStickerInput = $stickerInput.val();
+
+    console.log($stickerInput, $updatedStickerInput, $stickerId);
+
+    updateSticker($stickerId, $updatedStickerInput);
 
 }
 
@@ -79,7 +85,19 @@ function createSticker(data) {
         .then((newSticker) => {
             stickerList.push(newSticker);
             showAddedSticker(newSticker);
+            alert('Sticker was successfully created')
         });
+}
+
+function updateSticker(id, newData) {
+    let sticker = stickerList.find((el) => el.id == id);
+
+    Object.assign(sticker, {description: newData});
+    Dashboard.update(id, {description: newData})
+        .then((updatedSticker) => {
+            stickerList.push(updatedSticker);
+            alert('Sticker was successfully updated')
+        })
 }
 
 function showAddedSticker(data) {
