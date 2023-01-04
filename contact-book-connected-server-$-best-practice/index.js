@@ -38,16 +38,20 @@ function onAddContactBtnClick(e) {
   clearForm();
 }
 
-function onContactDeleteClick(event) { // event.target === this
-  const contactEl = findContactEl(this);
-  const contact = findContactByContactEl(contactEl)
+function onContactDeleteClick(event) {
+  const contactEl = findContactEl($(this));
+  const contact = findContactByContactEl(contactEl);
 
   if (contact) {
+    setContactData(contactList.filter((el) => el.id != contact.id))
     contactEl.remove();
+    ContactApi.delete(contact.id).then(() => {
+      alert('Contact was successfully deleted')
+   })
   }
 }
 
-function onContactEditClick(e) { // e.target === this
+function onContactEditClick(e) {
   const $contactEl = findContactEl($(this));
   const contact = findContactByContactEl($contactEl)
 
@@ -64,6 +68,10 @@ function findContactByContactEl($contactEl) {
   const id = $contactEl.data('id');
 
   return findContactById(String(id));
+}
+
+function setContactData(data) {
+  return (contactList = data);
 }
 
 function setFormData(contact) {

@@ -1,5 +1,5 @@
 class ContactApi {
-    static URL = 'https://62054479161670001741b708.mockapi.io/api/contacts/';
+    static URL = 'https://639e0c333542a2613055e354.mockapi.io/api/v1/contacts_book/';
 
     static request(url = '', method = 'GET', body) {
         return fetch(ContactApi.URL + url, {
