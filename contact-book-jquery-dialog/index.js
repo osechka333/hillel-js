@@ -66,9 +66,9 @@ function onContactDeleteClick(event) {
 
   if (contact) {
     setContactData(contactList.filter((el) => el.id != contact.id))
-    contactEl.remove();
     ContactApi.delete(contact.id).then(() => {
-      alert('Contact was successfully deleted')
+      alert('Contact was successfully deleted');
+      contactEl.remove();
    })
   }
 }
