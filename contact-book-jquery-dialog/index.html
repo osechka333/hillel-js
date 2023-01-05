@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Contacts</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./index.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"></script>
+  <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script defer src="ContactApi.js"></script>
+  <script defer src="index.js"></script>
+</head>
+<body>
+<div id="newContact">
+  <button id="addNewContact">Add new contact</button>
+</div>
+<div id="dialog-window" title="Create new contact">
+  <p class="validateTips">Please fill all fields.</p>
+
+  <form>
+    <fieldset>
+      <input type="hidden" id="id" name="id" class="formInput text ui-widget-content ui-corner-all">
+      <label for="firstName">Name</label>
+      <input type="text" id="firstName"  name="firstName" class="formInput text ui-widget-content ui-corner-all">
+      <label for="lastName">Surname</label>
+      <input type="text" id="lastName" name="lastName" class="formInput text ui-widget-content ui-corner-all">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" class="formInput text ui-widget-content ui-corner-all">
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Phone</th>
+    <th>Actions</th>
+  </tr>
+
+  <tbody id="contactContainer"></tbody>
+</table>
+
+</body>
+</html>
