@@ -31,6 +31,7 @@ const dialog = $dialogForm.dialog({
       }
 
       saveContact(contact);
+      // setContactData(contact);
       renderContactList(contactList);
     },
     Cancel: function() {
@@ -75,10 +76,13 @@ function onContactDeleteClick(event) {
 
 function onContactEditClick(e) {
   const $contactEl = findContactEl($(this));
-  const contact = findContactByContactEl($contactEl)
+  const contact = findContactByContactEl($contactEl);
+  console.log(contact);
 
   if (contact) {
-      setFormData(contact)
+    e.preventDefault();
+    setFormData(contact);
+    dialog.dialog('open');
   }
 }
 
@@ -97,15 +101,20 @@ function setContactData(data) {
 }
 
 function setFormData(contact) {
-  for (const input of $inputs) {
-    if (Object.hasOwn(contact, input.name)) {
-      input.value = contact[input.name];
-    }
-  }
+  $inputs[0].value = contact.id;
+  $inputs[1].value = contact.firstName;
+  $inputs[2].value = contact.lastName;
+  $inputs[3].value = contact.phone;
+  // for (const input of $inputs) {
+  //   if (Object.hasOwn(contact, input.name)) {
+  //     input.value = contact[input.name];
+  //   }
+  // }
 }
 
 function getUserInput(data) {
   return {
+    id: data.id.value,
     firstName: data.firstName.value,
     lastName: data.lastName.value,
     phone: data.phone.value
@@ -132,11 +141,11 @@ function saveContact(contact) {
     ContactApi.update(contact.id, contact)
       .then((newContact) => {
         updateKeys(contact.id, newContact);
+        replaceContact(contact.id, contact);
         dialogClose();
       })
       .catch(showError)
 
-    replaceContact(contact.id, contact);
   } else {
     ContactApi.create(contact)
       .then((newContact) => {
