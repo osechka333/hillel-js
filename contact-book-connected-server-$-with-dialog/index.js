@@ -2,16 +2,48 @@ const EDIT_BTN_CLASS = 'editBtn';
 const DELETE_BTN_CLASS = 'deleteBtn';
 const CONTACT_ITEM_SELECTOR = '.contactItem';
 const FORM_DOM_EL = 0;
+const ADD_BUTTON_SELECTOR = '#addNewContact';
+const FORM = 'form';
 
 const $form = $('#contactForm');
+const $dialogForm = $("#dialog-form");
 const $inputs = $('.formInput');
 const $contactContainer = $('#contactContainer');
 let contactList = [];
 
-$form.on('submit', onAddContactBtnClick);
+$form.on('click', ADD_BUTTON_SELECTOR, onAddContactBtnClick)
 $contactContainer
   .on('click', '.' + DELETE_BTN_CLASS, onContactDeleteClick)
   .on('click', '.' + EDIT_BTN_CLASS, onContactEditClick);
+
+const dialog = $dialogForm.dialog({
+  autoOpen: false,
+  height: 400,
+  width: 350,
+  modal: true,
+  buttons: {
+    Save: () => {
+      const contact = getUserInput(formDetails);
+
+      if (!isContactValid(contact)) {
+        showError(new Error('Wrong input data'));
+        return;
+      }
+
+      saveContact(contact);
+      // setContactData(contact);
+      renderContactList(contactList);
+    },
+    Cancel: function() {
+      dialog.dialog('close');
+    }
+  },
+  close: function() {
+    dialog.dialog('close');
+  }
+});
+
+const formDetails = dialog.find(FORM)[FORM_DOM_EL];
 
 init();
 
@@ -26,16 +58,7 @@ function init() {
 
 function onAddContactBtnClick(e) {
   e.preventDefault();
-
-  const contact = getContact();
-
-  if (!isContactValid(contact)) {
-    showError(new Error('Wrong input data'));
-    return;
-  }
-
-  saveContact(contact);
-  clearForm();
+  dialog.dialog('open');
 }
 
 function onContactDeleteClick(event) {
@@ -53,10 +76,13 @@ function onContactDeleteClick(event) {
 
 function onContactEditClick(e) {
   const $contactEl = findContactEl($(this));
-  const contact = findContactByContactEl($contactEl)
+  const contact = findContactByContactEl($contactEl);
+  console.log(contact);
 
   if (contact) {
-      setFormData(contact)
+    e.preventDefault();
+    setFormData(contact);
+    dialog.dialog('open');
   }
 }
 
@@ -75,21 +101,24 @@ function setContactData(data) {
 }
 
 function setFormData(contact) {
-  for (const input of $inputs) {
-    if (Object.hasOwn(contact, input.name)) {
-      input.value = contact[input.name];
-    }
-  }
+  $inputs[0].value = contact.id;
+  $inputs[1].value = contact.firstName;
+  $inputs[2].value = contact.lastName;
+  $inputs[3].value = contact.phone;
+  // for (const input of $inputs) {
+  //   if (Object.hasOwn(contact, input.name)) {
+  //     input.value = contact[input.name];
+  //   }
+  // }
 }
 
-function getContact() {
-  const contact = {};
-
-  for (const { name, value } of $inputs) {
-    contact[name] = value;
+function getUserInput(data) {
+  return {
+    id: data.id.value,
+    firstName: data.firstName.value,
+    lastName: data.lastName.value,
+    phone: data.phone.value
   }
-
-  return contact;
 }
 
 function isContactValid(contact) {
@@ -99,7 +128,7 @@ function isContactValid(contact) {
     && isPhone(contact.phone);
 }
 
-function isEmpty(str) { // boolean
+function isEmpty(str) {
   return str === '';
 }
 
@@ -112,17 +141,17 @@ function saveContact(contact) {
     ContactApi.update(contact.id, contact)
       .then((newContact) => {
         updateKeys(contact.id, newContact);
-        clearForm();
+        replaceContact(contact.id, contact);
+        dialogClose();
       })
       .catch(showError)
 
-    replaceContact(contact.id, contact);
   } else {
     ContactApi.create(contact)
       .then((newContact) => {
         contactList.push(newContact);
         renderContact(newContact)
-        clearForm();
+        dialogClose();
       })
       .catch(showError)
   }
@@ -141,14 +170,14 @@ function renderContact(contact) {
   $contactContainer.append(html);
 }
 
-function clearForm() {
-  $form[FORM_DOM_EL].reset();
+function dialogClose() {
+  formDetails.reset();
+  dialog.dialog("close");
 }
 
 function showError(error) {
   alert(error.message)
 }
-
 
 function findContactById(id) {
   return contactList.find(item => item.id === id);
