@@ -3,10 +3,10 @@ const DELETE_BTN_CLASS = 'deleteBtn';
 const CONTACT_ITEM_SELECTOR = '.contactItem';
 const FORM_DOM_EL = 0;
 const ADD_BUTTON_SELECTOR = '#addNewContact';
-const FORM = 'form';
+const MAIN_FORM = 'form';
 
-const $form = $('#contactForm');
-const $dialogForm = $("#dialog-form");
+const $form = $('#newContact');
+const $dialogWindow = $("#dialog-window");
 const $inputs = $('.formInput');
 const $contactContainer = $('#contactContainer');
 let contactList = [];
@@ -16,7 +16,7 @@ $contactContainer
   .on('click', '.' + DELETE_BTN_CLASS, onContactDeleteClick)
   .on('click', '.' + EDIT_BTN_CLASS, onContactEditClick);
 
-const dialog = $dialogForm.dialog({
+const dialog = $dialogWindow.dialog({
   autoOpen: false,
   height: 400,
   width: 350,
@@ -42,7 +42,7 @@ const dialog = $dialogForm.dialog({
   }
 });
 
-const formDetails = dialog.find(FORM)[FORM_DOM_EL];
+const formDetails = dialog.find(MAIN_FORM)[FORM_DOM_EL];
 
 init();
 
@@ -181,7 +181,7 @@ function findContactById(id) {
 function updateKeys(id, changes) {
   const oldContact = findContactById(id)
 
-  Object.keys(changes).forEach(key => oldContact[key] = changes[key]);
+  Object.assign(oldContact, changes);
 }
 
 function replaceContact(id, contact) {
