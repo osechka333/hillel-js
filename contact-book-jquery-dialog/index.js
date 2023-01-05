@@ -31,7 +31,6 @@ const dialog = $dialogForm.dialog({
       }
 
       saveContact(contact);
-      // setContactData(contact);
       renderContactList(contactList);
     },
     Cancel: function() {
@@ -101,15 +100,11 @@ function setContactData(data) {
 }
 
 function setFormData(contact) {
-  $inputs[0].value = contact.id;
-  $inputs[1].value = contact.firstName;
-  $inputs[2].value = contact.lastName;
-  $inputs[3].value = contact.phone;
-  // for (const input of $inputs) {
-  //   if (Object.hasOwn(contact, input.name)) {
-  //     input.value = contact[input.name];
-  //   }
-  // }
+  for (const input of $inputs) {
+    if (Object.hasOwn(contact, input.name)) {
+      input.value = contact[input.name];
+    }
+  }
 }
 
 function getUserInput(data) {
