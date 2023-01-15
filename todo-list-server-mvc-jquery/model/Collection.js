@@ -1,7 +1,7 @@
 class Collection {
     #list = [];
 
-    fetch() {
+    getData() {
         return TodoApi.getList()
             .then((list) => {
                 this.#list = list;

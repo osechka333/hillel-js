@@ -13,7 +13,7 @@ class Controller {
         this.formView.appendTo($root);
 
         this.collection
-            .fetch()
+            .getData()
             .then((list) => {
                 this.listView.renderList(list);
             })
