@@ -1,6 +1,13 @@
-const ws = new WebSocket('ws://localhost:8080');
+import Chat from './Chat.js';
+
 const form = document.querySelector('#chatForm');
 const containerForMessage = document.querySelector('#containerForSavedMessages');
+const chat = new Chat({
+    onMessage: ((data) => {
+        displayUserInput(data);
+        clearFormAfterSend();
+    })
+});
 
 form.addEventListener('submit', onFormDataSubmit);
 
@@ -12,25 +19,10 @@ function onFormDataSubmit(e) {
         text: form.message.value
     }
 
-    ws.send(JSON.stringify(clientMessage));
+    chat.send(clientMessage);
 }
 
-
-console.log(ws);
-
-ws.onopen = () => {
-    console.log('Websocket is connected');
-}
-ws.onmessage = (e) => {
-    console.log('The message is sent');
-
-    displayUserInput(e);
-    clearFormAfterSend();
-}
-
-function displayUserInput(messageObject) {
-    const userInput = JSON.parse(messageObject.data);
-
+function displayUserInput(userInput) {
     let html = `<li>${userInput.name}: ${userInput.text}</li>`
     containerForMessage.insertAdjacentHTML('beforeend', html);
 }
