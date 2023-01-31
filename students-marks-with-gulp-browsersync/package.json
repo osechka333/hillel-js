@@ -1,0 +1,17 @@
+{
+  "name": "students-marks-with-gulp-browsersync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.3.0",
+    "gulp-concat": "^2.6.1"
+  }
+}
