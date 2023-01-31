@@ -1,3 +1,6 @@
+const MARKS_SELECTOR = 'mark-input';
+const DELETE_BTN_SELECTOR = 'delete-btn';
+const STUDENT_SELECTOR = '.student-item';
 const studentsContainer = document.querySelector('#studentsList');
 const studentsForm =  document.querySelector('#studentsForm');
 
@@ -17,8 +20,8 @@ function onStudentFormSubmit(e) {
     StudentMarksApi
         .create(newStudentName)
         .then((newName) => {
-            addStudentToList(newName)
-        })
+            addStudentToList(newName);
+        });
 
     clearUserFormInput();
 }
@@ -27,12 +30,12 @@ function onStudentListClick(e) {
     const studentEl = getStudentId(e.target);
     const studentId = studentEl.dataset.id;
 
-    if(studentId && e.target.classList.contains('delete')) {
+    if(studentId && getElement(e, DELETE_BTN_SELECTOR)) {
         StudentMarksApi
             .delete(studentId)
             .then(() => {
                 studentEl.remove();
-            })
+            });
     }
 }
 
@@ -40,14 +43,13 @@ function onStudentListFocusOut(e) {
     const studentEl = getStudentId(e.target);
     const studentId = studentEl.dataset.id;
 
-    if(studentId && e.target.classList.contains('mark-input')) {
+    if(studentId && getElement(e, MARKS_SELECTOR)) {
         const marks = getStudentMarks(studentEl);
         StudentMarksApi
             .update(studentId, {marks})
             .then(() => {
                 alert('Student marks are updated');
-            }
-        );
+            });
     }
 }
 
@@ -58,13 +60,17 @@ function getStudentNameInForm() {
 }
 
 function getStudentId(el) {
-    return el.closest('.student-item');
+    return el.closest(STUDENT_SELECTOR);
 }
 
 function getStudentMarks(el) {
     return Array
-        .from(el.querySelectorAll('.mark-input'))
+        .from(el.querySelectorAll('.' + MARKS_SELECTOR))
         .map(input => Number(input.value));
+}
+
+function getElement(event, element){
+    return event.target.classList.contains(element);
 }
 
 function renderStudentList(list) {
@@ -83,7 +89,7 @@ function generateStudentHtml(student) {
              <td>${student.name}</td>
             ${generateStudentMarks(student.marks)}
              <td>
-                <button class="delete">Delete</button>
+                <button class="delete-btn">Delete</button>
             </td>
         </tr>`;
 }
