@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp build",
+    "start": "gulp start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "browser-sync": "^2.27.11",
+    "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
-    "gulp-concat": "^2.6.1"
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.2"
   }
 }

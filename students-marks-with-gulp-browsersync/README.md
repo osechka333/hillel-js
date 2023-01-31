@@ -10,4 +10,6 @@ HOW TO CREATE A STUDENTS MARKS
 
 Note: 
 - <script src="index.js" type="module"></script> // module includes defer by default
--do not use the script/files and modules
+- do not use the script/files and modules
+- npm install --save-dev gulp-uglify 
+- npm install browser-sync gulp --save-dev

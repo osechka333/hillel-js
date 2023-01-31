@@ -1,4 +1,4 @@
-export default class StudentMarksApi {
+class StudentMarksApi {
     static URL = 'https://639e0c333542a2613055e354.mockapi.io/api/v1/students/';
 
     static request(url = '', method = 'GET', body) {

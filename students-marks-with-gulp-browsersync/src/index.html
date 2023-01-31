@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Student Marks</title>
     <link rel="stylesheet" href="index.css"/>
-    <script src="index.js" type="module"></script>
+    <script src="all.js" defer></script>
 </head>
 <body>
     <table>
@@ -15,10 +15,10 @@
     </tr>
         <tbody id="studentsList"></tbody>
     </table>
-    <form name="studentsForm">
+    <form id="studentsForm">
         <input id="id" type="hidden">
         <label for="name">Student Name</label>
-        <input id="name" type="text">
+        <input id="name" type="text" required>
         <button>Save</button>
     </form>
 </body>
