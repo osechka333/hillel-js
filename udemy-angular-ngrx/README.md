@@ -11,7 +11,8 @@ REDUX - predictable state container for JS apps/ library
 way to structure application and say how our data will change the state
 Angular has no structure
 File structure - with src/app module for each page
-Prettier - code formatter 
+Prettier - code formatter
+npm install --save-dev --save-exact prettier
 //  press ⌥ ⇧ ⌘ P or select Reformat with Prettier from the context menu.
 
 Language Server Protocol (Microsoft)
