@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import LiftingUp from './LiftingUp';
+import Colocating from './Colocating';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<LiftingUp />);
+// root.render(<Colocating />);

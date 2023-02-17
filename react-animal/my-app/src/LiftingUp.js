@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-const defaultState = '___';
+const defaultView = '___';
 
-function App() {
+function LiftingUp() {
   const [animal, setAnimal] = React.useState('')
   const [name, setName] = React.useState('')
 
@@ -27,7 +27,7 @@ function Name({name, onNameChange}) {
 function FavoriteAnimal({animal, onAnimalChange}) {
   return (
     <div>
-      <label htmlFor="animal">Favorite Animal is: </label>
+      <label htmlFor="animal">Your Favorite Animal is: </label>
       <input id="animal" value={animal} onChange={onAnimalChange}/>
     </div>
   )
@@ -37,8 +37,8 @@ function Display({name, animal}) {
   if(name && animal) {
     return <div>{`Hey ${name}, your favorite animal is ${animal}!`}</div>
   } else {
-    return <div>{`Hey ${defaultState}, your favorite animal is ${defaultState}!`}</div>
+    return <div>{`Hey ${defaultView}, your favorite animal is ${defaultView}!`}</div>
   }
 }
 
-export default App
+export default LiftingUp

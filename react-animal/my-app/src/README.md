@@ -25,3 +25,5 @@ it means the removed the local state from it:
 -     const temperature = this.state.temperature;
 -     const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
 -     const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+Another resource: 
+https://egghead.io/lessons/react-lifting-and-colocating-react-state
