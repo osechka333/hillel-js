@@ -5,9 +5,12 @@ export const ACTION_CREATE = 'create';
 export const ACTION_DELETE = 'remove';
 export const ACTION_UPDATE = 'update';
 export const ACTION_STATUS_UPDATE = 'statusChange';
+export const ACTION_SHOW_LOADER = 'loading';
 
 export function getList () {
-  return(dispatch) => {
+  return(dispatch, state) => {
+    dispatch(loading())
+
     TodoItemApi
       .getList()
       .then((list => {
@@ -19,6 +22,9 @@ export function getList () {
 
 export function setList (list) {
   return { type: ACTION_SET_LIST, payload: list }
+}
+export function loading () {
+  return { type: ACTION_SHOW_LOADER, payload: true}
 }
 export function create (item) {
   return { type: ACTION_CREATE, payload: item }
