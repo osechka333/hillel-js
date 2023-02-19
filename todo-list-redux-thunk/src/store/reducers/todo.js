@@ -1,6 +1,6 @@
 import {
   ACTION_CREATE,
-  ACTION_DELETE, ACTION_STATUS_UPDATE,
+  ACTION_DELETE, ACTION_SET_LIST, ACTION_STATUS_UPDATE,
   ACTION_UPDATE
 } from '../actions/todo'
 
@@ -9,12 +9,7 @@ const DEFAULT_ITEM_CONTENT = {
   done: false,
 }
 const initialState = {
-  list: [
-    { title: 'item 1', done: true, id: '1' },
-    { title: 'item 2', done: false, id: '2' },
-    { title: 'item 3', done: true, id: '3' },
-    { title: 'item 4', done: false, id: '4' }
-  ],
+  list: [],
   editItem: DEFAULT_ITEM_CONTENT,
 }
 
@@ -38,6 +33,7 @@ export default function todoReducer (state = initialState, { type, payload }) {
       const done = !(updatedItem.done);
       updatedItem.done = done
       return { ...state, list: state.list.map(todoItem => todoItem.id === payload ? updatedItem : todoItem)};
+    case ACTION_SET_LIST: return { ...state, list: payload};
 
     default: return state;
   }
