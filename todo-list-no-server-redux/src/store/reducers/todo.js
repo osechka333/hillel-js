@@ -38,7 +38,6 @@ export default function todoReducer (state = initialState, { type, payload }) {
       const updatedItem = state.list.find(item => item.id === payload)
       const done = !(updatedItem.done);
       updatedItem.done = done
-      console.log(updatedItem);
       return { ...state, list: state.list.map(todoItem => todoItem.id === payload ? updatedItem : todoItem)};
 
     default: return state;
