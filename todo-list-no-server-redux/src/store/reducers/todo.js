@@ -6,7 +6,6 @@ import {
 
 const DEFAULT_ITEM_CONTENT = {
   title: '',
-  status: false,
   done: false,
 }
 const initialState = {
