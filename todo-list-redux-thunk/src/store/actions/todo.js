@@ -3,12 +3,13 @@ import { TodoItemApi } from '../../api/api'
 export const ACTION_SET_LIST = 'setList';
 export const ACTION_CREATE = 'create';
 export const ACTION_DELETE = 'remove';
-export const ACTION_UPDATE = 'update';
+export const ACTION_EDIT = 'edit';
 export const ACTION_STATUS_UPDATE = 'statusChange';
 export const ACTION_SHOW_LOADER = 'loading';
+export const ACTION_UPDATE = 'update';
 
 export function getList () {
-  return(dispatch, state) => {
+  return(dispatch) => {
     dispatch(loading())
 
     TodoItemApi
@@ -17,6 +18,26 @@ export function getList () {
       dispatch(setList(list))
       })
     )
+  }
+}
+
+export function saveRequest (item) {
+  return (dispatch) => {
+    dispatch(loading())
+
+    if (item.id) {
+      TodoItemApi
+        .update(item.id, item)
+        .then(() => {
+          dispatch(update(item))
+        })
+    } else {
+      TodoItemApi
+        .create(item)
+        .then((newItem) => {
+          dispatch(create(newItem))
+        })
+    }
   }
 }
 
@@ -29,12 +50,27 @@ export function loading () {
 export function create (item) {
   return { type: ACTION_CREATE, payload: item }
 }
-export function remove (item) {
-  return { type: ACTION_DELETE, payload: item }
+export function edit (item) {
+  return { type: ACTION_EDIT, payload: item }
 }
 export function update (item) {
   return { type: ACTION_UPDATE, payload: item }
 }
 export function updateStatus (item) {
   return { type: ACTION_STATUS_UPDATE, payload: item }
+}
+export function remove (item) {
+  return { type: ACTION_DELETE, payload: item }
+}
+
+export function deleteRequest (id) {
+  return (dispatch) => {
+    dispatch(loading())
+
+    TodoItemApi
+      .delete(id)
+      .then(() => {
+        dispatch(remove(id));
+      })
+  }
 }

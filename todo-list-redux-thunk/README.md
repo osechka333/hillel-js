@@ -8,3 +8,5 @@ PLUGINS:
 // thunk - a piece of code that does some delayed work".
 6) Redux toolkit https://redux-toolkit.js.org/ 
 7) npm install redux-thunk
+8) service for authentification - firebase
+9) 

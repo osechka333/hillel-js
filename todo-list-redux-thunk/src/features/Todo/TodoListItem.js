@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { remove, update, updateStatus } from '../../store/actions/todo';
+import { edit, updateStatus, deleteRequest } from '../../store/actions/todo'
 
 export default function TodoListItem ({ item }) {
   const dispatch = useDispatch();
@@ -9,11 +9,11 @@ export default function TodoListItem ({ item }) {
 }
 
   function onDeleteButtonClick () {
-    dispatch(remove(item.id))
+    dispatch(deleteRequest(item.id))
   }
 
   function onEditButtonClick () {
-    dispatch(update(item))
+    dispatch(edit(item))
   }
 
   return (

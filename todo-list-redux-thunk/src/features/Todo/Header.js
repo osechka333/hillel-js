@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { create } from '../../store/actions/todo'
+import { saveRequest } from '../../store/actions/todo'
 
 export default function Header() {
   const item = useSelector(state => state.item.editItem)
   const [title, setTitle] = useState(item?.title ?? '');
-  const sendingData = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTitle(item.title);
@@ -14,12 +14,11 @@ export default function Header() {
   function onFormSubmit (e) {
     e.preventDefault()
 
-    const newTodo = {
-      id: Math.random().toString(),
+    const newItem= {
       ...item,
       title,
     };
-    sendingData(create(newTodo))
+    dispatch(saveRequest(newItem))
     setTitle('');
   }
 
