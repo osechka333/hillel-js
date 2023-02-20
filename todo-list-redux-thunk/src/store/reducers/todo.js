@@ -33,9 +33,8 @@ export default function todoReducer (state = initialState, { type, payload }) {
        }
     case ACTION_EDIT: return { ...state, editItem: payload }
     case ACTION_STATUS_UPDATE:
-      const updatedItem = state.list.find(item => item.id === payload)
-      const done = !(updatedItem.done);
-      updatedItem.done = done
+      const updatedItem = state.list.find(item => item.id === payload);
+      updatedItem.done =! (updatedItem.done);
       return { ...state, list: state.list.map(todoItem => todoItem.id === payload ? updatedItem : todoItem)};
     case ACTION_DELETE: return { ...state, list: state.list.filter(item => item.id !== payload), loading: false }
     default: return state;

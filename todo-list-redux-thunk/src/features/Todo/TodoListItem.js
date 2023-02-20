@@ -1,12 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { edit, updateStatus, deleteRequest } from '../../store/actions/todo'
+import { useDispatch } from 'react-redux'
+import { deleteRequest, edit, saveRequest, updateStatus } from '../../store/actions/todo'
 
 export default function TodoListItem ({ item }) {
   const dispatch = useDispatch();
 
-  function onCheckBoxClick () {
-    dispatch(updateStatus(item.id))
-}
+  function onCheckBoxClick (item) {
+    dispatch(updateStatus(item.id));
+    dispatch(saveRequest(item));
+  }
 
   function onDeleteButtonClick () {
     dispatch(deleteRequest(item.id))

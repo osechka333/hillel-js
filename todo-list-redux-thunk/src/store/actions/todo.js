@@ -62,7 +62,6 @@ export function updateStatus (item) {
 export function remove (item) {
   return { type: ACTION_DELETE, payload: item }
 }
-
 export function deleteRequest (id) {
   return (dispatch) => {
     dispatch(loading())
