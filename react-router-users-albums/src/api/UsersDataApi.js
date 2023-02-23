@@ -23,16 +23,16 @@ export default class UsersDataApi {
                 throw new Error('Can not fetch the user list from the server');
             })
     }
-    static getAlbumPerUser(id) {
+    static getAlbumsPerUser(id) {
         return UsersDataApi.request(`albums?userId=${id}`)
             .catch(() => {
-                throw new Error('Can not fetch the user details from the server');
+                throw new Error('Can not fetch the albums from the server');
             })
     }
     static getPhotosPerAlbum(id) {
         return UsersDataApi.request(`photos?albumId=${id}`)
             .catch(() => {
-                throw new Error('Can not fetch the user details from the server');
+                throw new Error('Can not fetch the photos from the server');
             })
     }
 }

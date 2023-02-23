@@ -9,7 +9,7 @@ export default function AlbumsList () {
 
     useEffect(() => {
         if (idUser) {
-            UsersDataApi.getAlbumPerUser(idUser)
+            UsersDataApi.getAlbumsPerUser(idUser)
                 .then((albumsList) => {
                     setAlbum(albumsList)
                 })
