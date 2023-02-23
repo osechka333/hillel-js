@@ -1,10 +1,10 @@
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import UsersDataApi from "../../api/UsersDataApi";
 
 export default function AlbumsList () {
     const navigate = useNavigate()
-    const [albumsList, setAlbum] = useState([]);
+    const [albumsList, setAlbum ] = useState([]);
     let { idUser } = useParams();
 
     useEffect(() => {
@@ -16,8 +16,8 @@ export default function AlbumsList () {
         }
     }, [idUser])
 
-    function onPhotosBtnClick(albumData) {
-        navigate(`/users/${idUser}/albums/${albumData.id}`)
+    function onPhotosBtnClick(idAlbum) {
+        navigate(`/users/${idUser}/albums/${idAlbum}/photos`)
     }
 
     return (
@@ -28,11 +28,15 @@ export default function AlbumsList () {
                     {albumsList.map((albumData) => (
                         <li key={albumData.id}>{albumData.title}
                             <span>
-                                 <button onClick={() => onPhotosBtnClick(albumData)}>Photos</button>
+                                 <button onClick={() => onPhotosBtnClick(albumData.id)}>Photos</button>
                             </span>
                         </li>))
                     }
                 </ul>
+            </div>
+
+            <div>
+                <Link to='/users'><button>Back</button></Link>
             </div>
         </>
     )

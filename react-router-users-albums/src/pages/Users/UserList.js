@@ -21,6 +21,7 @@ export default function UserList () {
         <>
             <div>
                 <ul>
+                    <h4>List of users with gallery:</h4>
                     {list.map((user) => (
                         <li key={user.id}>{user.name}
                             <span>
