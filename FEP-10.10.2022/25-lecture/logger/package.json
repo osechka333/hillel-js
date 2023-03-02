@@ -1,0 +1,17 @@
+{
+  "name": "logger-42",
+  "version": "0.0.2",
+  "description": "some super puper logger",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "^1.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^1.4.0"
+  }
+}

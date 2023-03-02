@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nested</title>
+  <script defer src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+  <script defer src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector('#root');
+    // const hello = React.createElement('span', null, 'Hello');
+    // const world = React.createElement('span', null, 'World');
+    // const div = React.createElement('div', {
+    //   style: { color: 'red' },
+    //   className: 'container',
+    // }, hello, ' ', world);
+
+    const div = <div>Hello World</div>;
+
+    ReactDOM.createRoot(root).render(div);
+  </script>
+</head>
+<body>
+
+  <div id="root">
+<!--    <div class="container">-->
+<!--      <span>Hello</span>-->
+<!--      <span>World</span>-->
+<!--    </div>-->
+  </div>
+
+</body>
+</html>

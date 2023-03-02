@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nested</title>
+  <script defer src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+  <script defer src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function message({ children }) {
+      return <div className="message">{children}</div>
+    }
+
+    const div = (
+      <div className="container">
+        {message({ children: 'Hello World' })}
+        {message({ children: 'Goodbye World' })}
+      </div>
+    );
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(div);
+  </script>
+</head>
+<body>
+
+  <div id="root">
+<!--    <div className="container">-->
+<!--      <div className="message">Hello World</div>-->
+<!--      <div className="message">Goodbye World</div>-->
+<!--    </div>-->
+  </div>
+
+</body>
+</html>

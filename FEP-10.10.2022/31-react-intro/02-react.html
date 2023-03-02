@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React</title>
+  <script defer src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+  <script defer src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+  <script type="module">
+    // const root = document.querySelector('#root');
+    // const div = document.createElement('div');
+    //
+    // div.textContent = 'Hello World!';
+    // div.style.color = 'red';
+    //
+    // root.append(div);
+
+    const root = document.querySelector('#root');
+    // const div = React.createElement('div', {
+    //   children: 'Hello World!',
+    //   style: { color: 'red' },
+    //   className: 'aaa',
+    // });
+    // const div = React.createElement('div', {
+    //   style: { color: 'red' },
+    //   className: 'aaa bbb',
+    // }, 'Hello World!', 'qwe');
+    // const div = React.createElement('div', {}, 'Hello World!', 'qwe');
+
+    ReactDOM.createRoot(root).render(div);
+  </script>
+</head>
+<body>
+
+  <div id="root"></div>
+
+</body>
+</html>
